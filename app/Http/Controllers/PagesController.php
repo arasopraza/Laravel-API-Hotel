@@ -21,13 +21,4 @@ class PagesController extends Controller
         return view('/pesawat');
     }
 
-    public function registration()
-    {
-        return view('/registration');
-    }
-    
-    public function login()
-    {
-        return view('/login');
-    }
 }
