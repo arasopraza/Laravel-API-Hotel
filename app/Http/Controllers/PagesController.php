@@ -21,4 +21,24 @@ class PagesController extends Controller
         return view('/pesawat');
     }
 
+    public function query(Request $request){
+        $this->validate($request,[
+                   'cari' => 'required'
+                ]);
+        return view('proses',['data' => $request]);
+    }
+
+    // public function input()
+    // {
+    //     return view('input');
+    // }
+ 
+    // public function proses(Request $request)
+    // {
+    //     $this->validate($request,[
+    //        'cari' => 'required'
+    //     ]);
+ 
+    //     return view('proses',['data' => $request]);
+    // }
 }

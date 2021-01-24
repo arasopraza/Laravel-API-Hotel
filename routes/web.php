@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Expr\Cast\String_;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ Route::get('/', 'PagesController@home');
 Route::get('/hotel', 'PagesController@hotel');
 Route::get('/pesawat', 'PagesController@pesawat');
 
+Route::post('/hasil', 'PagesController@query');
+// Route::post('/proses', 'PagesController@proses');
 
 Auth::routes();
 

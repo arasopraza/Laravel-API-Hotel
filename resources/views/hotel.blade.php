@@ -4,6 +4,40 @@
 
 @section('body')
 
+<?php
+
+function getDetailHotel()
+{
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, [
+        CURLOPT_URL => "https://hotels4.p.rapidapi.com/properties/get-details?id=116980&locale=en_US&currency=USD&checkOut=2020-01-15&adults1=1&checkIn=2020-01-08",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => [
+            "x-rapidapi-host: hotels4.p.rapidapi.com",
+            "x-rapidapi-key: 66557f7647mshe8814ea2be3d39fp1cfd2djsn729760bd0887"
+        ],
+    ]);
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    return json_decode($response, TRUE);
+}
+
+$response = getDetailHotel();
+
+?>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -18,7 +52,17 @@
             </div>
         </div>
     </nav>
-    <h1>Cari Hotel, Yuk!</h1>
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Nama : <?= $response["data"]["body"]["propertyDescription"]["name"];?>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Kota : <?= $response["data"]["body"]["pdpHeader"]["hotelLocation"]["locationName"];?>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Alamat : <?= $response["data"]["body"]["propertyDescription"]["address"]["fullAddress"];?>
+        </li>
+    </ul>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

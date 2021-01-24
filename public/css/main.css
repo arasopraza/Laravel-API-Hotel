@@ -1,0 +1,182 @@
+@font-face{
+    font-family: Poppins-Light;
+    src: url(../assets/font/Poppins-Light.ttf);
+}
+
+@font-face{
+    font-family: Poppins-Regular;
+    src: url(../assets/font/Poppins-Regular.ttf);
+}
+
+@font-face{
+    font-family: Poppins-Medium;
+    src: url(../assets/font/Poppins-Medium.ttf);
+}
+
+@font-face{
+    font-family: Poppins-Semibold;
+    src: url(../assets/font/Poppins-SemiBold.ttf);
+}
+
+
+
+/* //*UTILITIES PAKAI BERULANG */
+.btn{
+    background-color: #F62065;
+    border: 0;
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.btn:hover{
+    color: white;
+    background-color: #F62065;
+    box-shadow: 0 5px 18px #F62065;
+}
+
+
+
+ /* //*DESTINASI POPULER PAGE */
+/* //*navbar */
+
+ .profile-icon img{
+    width: 24px;
+    margin-top: -6px;
+    transition-delay: 100ms;
+}
+
+.profile-icon img:hover{
+    width: 24px;
+    margin-top: -6px;
+    transform: rotate(-45deg);
+}
+
+/* //* content */
+
+.title-destinasi-populer p{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.card{
+    position: relative;
+    color: black;
+    width:330px;
+    border-radius: 30px;
+    border: 1px solid #dadada;
+    box-shadow: 0 5px 10px #dadada;
+    transition-duration: 700ms;
+}
+
+.card:hover{
+    color: black;
+    width:330px;
+    border-radius: 30px;
+    border: 1px solid #dadada;
+    box-shadow: 0 0 0 #ededed;
+}
+
+.border-image img{
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+.pulau p{
+    margin-top: -12px;
+}
+
+.warna-harga{
+    color: #F62065;
+}
+
+.text-tebal span.kecil{
+    font-size: 12px;
+}
+
+.rating img{
+    position: absolute;
+    right: 50px;
+    bottom: 97px;
+    width: 28px;
+}
+
+.rating p{
+    position: absolute;
+    right: 20px;
+    bottom: 82px;
+}
+
+.btn-card a{
+    right: 20px;
+    bottom: 20px;
+    position: absolute;
+}
+
+/* //*footer */
+
+.margin-footer{
+    margin-top: 120px;
+}
+
+.logo-footer{
+    width: 250px;
+}
+
+.border-footer{
+    text-decoration: none;
+    padding-left: 10px;
+    border-left: 3px solid #F62065;
+    transition-duration: 700ms;
+}
+
+.border-footer:hover{
+    color: white;
+    text-decoration: none;
+    padding-left: 10px;
+    
+}
+
+.cont-footer{
+    background-color: #F62065;
+    width: 3px;
+    transition-duration: 500ms;
+}
+
+.cont-footer:hover{
+    background-color: #F62065;
+    width: 95px;
+}
+
+.cont-footer-text-panjang{
+    background-color: #F62065;
+    width: 3px;
+    transition-duration: 500ms;
+}
+
+.cont-footer-text-panjang:hover{
+    background-color: #F62065;
+    width: 140px;
+}
+
+.icon-footer{
+    margin: 5px;
+    width: 24px;
+    transition-duration: 100ms;
+}
+
+.icon-footer:hover{
+    margin: 5px;
+    width: 24px;
+    transform: rotate(-20deg);
+}
+
+
+
+
+
+
+
+
+
+/* //*END DESTINASI POPULER PAGE */
