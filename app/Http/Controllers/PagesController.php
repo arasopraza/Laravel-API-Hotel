@@ -13,7 +13,7 @@ class PagesController extends Controller
 
     public function hotel()
     {
-        return view('/hotel');
+        return view('hotel');
     }
 
     public function pesawat()
@@ -25,7 +25,11 @@ class PagesController extends Controller
         $this->validate($request,[
                    'cari' => 'required'
                 ]);
-        return view('proses',['data' => $request]);
+        return view('hasil_pencarian',['data' => $request]);
+    }
+
+    public function detail(){
+        return view('detail_hotel');
     }
 
     // public function input()

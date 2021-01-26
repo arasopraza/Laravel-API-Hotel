@@ -3,49 +3,6 @@
 @section('title', 'Home')
 
 @section('body')
-
-<?php
-
-use Illuminate\Http\Client\Request;
-use Illuminate\Support\Facades\Route;
-
-function getHotel($query)
-{
-
-    $curl = curl_init();
-
-    curl_setopt_array($curl, [
-        CURLOPT_URL => "https://hotels4.p.rapidapi.com/locations/search?query=$query&locale=en_US",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => [
-            "x-rapidapi-host: hotels4.p.rapidapi.com",
-            "x-rapidapi-key: 66557f7647mshe8814ea2be3d39fp1cfd2djsn729760bd0887"
-        ],
-    ]);
-
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
-
-    curl_close($curl);
-
-    return json_decode($response, TRUE);
-}
-
-
-$response = getHotel("Padang");
-$hotels = [];
-foreach ($response["suggestions"][1]["entities"] as $hotel) {
-    $hotels[] = $hotel["name"];
-}
-// <?php echo $response["suggestions"][1]["entities"][0]["name"];
-?>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
         <div class="container-fluid">
@@ -58,7 +15,7 @@ foreach ($response["suggestions"][1]["entities"] as $hotel) {
                 <a class="nav-link" href="/hotel">Hotel</a>
                 <a class="nav-link" href="/pesawat">Pesawat</a>
                 <a class="nav-link" href="/register">Daftar</a>
-                <form class="form-inline" method="POST" action="/hasil">
+                <form class="form-inline" method="POST" action="/hasil_pencarian">
                 @csrf
                     <input name="cari" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -66,18 +23,6 @@ foreach ($response["suggestions"][1]["entities"] as $hotel) {
             </div>
         </div>
     </nav>
-
-    <h2>List hotel yang ada di  <?= $response["term"]; ?></h2>
-    <?php foreach ($hotels as $hotel) : ?>
-        <div class="col-6">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <?= $hotel; ?>
-                    <a href="/hotel" class="badge badge-info">Detail</a>
-                </li>
-            </ul>
-        </div>
-    <?php endforeach; ?>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

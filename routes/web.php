@@ -15,11 +15,9 @@ use PhpParser\Node\Expr\Cast\String_;
 */
 
 Route::get('/', 'PagesController@home');
-Route::get('/hotel', 'PagesController@hotel');
 Route::get('/pesawat', 'PagesController@pesawat');
-
-Route::post('/hasil', 'PagesController@query');
-// Route::post('/proses', 'PagesController@proses');
+Route::post('/hasil_pencarian', 'PagesController@query');
+Route::get('/detail_hotel/{id}', 'PagesController@detail');
 
 Auth::routes();
 

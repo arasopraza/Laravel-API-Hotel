@@ -1,18 +1,21 @@
 @extends('layout/main')
 
-@section('title', 'Hotel')
+@section('title', 'Home')
 
 @section('body')
 
 <?php
 
-function getDetailHotel()
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Route;
+
+function getHotel($query)
 {
 
     $curl = curl_init();
 
     curl_setopt_array($curl, [
-        CURLOPT_URL => "https://hotels4.p.rapidapi.com/properties/get-details?id=116980&locale=en_US&currency=USD&checkOut=2020-01-15&adults1=1&checkIn=2020-01-08",
+        CURLOPT_URL => "https://hotels4.p.rapidapi.com/locations/search?query=$query&locale=en_US",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_ENCODING => "",
@@ -33,13 +36,13 @@ function getDetailHotel()
 
     return json_decode($response, TRUE);
 }
-
-$response = getDetailHotel();
-
+$kota = $data->cari;
+$response = getHotel($kota);
+$hotel = $response["suggestions"][1]["entities"];
 ?>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
         <div class="container-fluid">
             <!-- <a class="navbar-brand" href="#">Navbar</a> -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,20 +52,29 @@ $response = getDetailHotel();
                 <a class="nav-link active" href="/">Home</a>
                 <a class="nav-link" href="/hotel">Hotel</a>
                 <a class="nav-link" href="/pesawat">Pesawat</a>
+                <a class="nav-link" href="/register">Daftar</a>
+                <form class="form-inline" method="POST" action="/cari">
+                    @csrf
+                    <input name="cari" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
             </div>
         </div>
     </nav>
-    <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Nama : <?= $response["data"]["body"]["propertyDescription"]["name"];?>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Kota : <?= $response["data"]["body"]["pdpHeader"]["hotelLocation"]["locationName"];?>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Alamat : <?= $response["data"]["body"]["propertyDescription"]["address"]["fullAddress"];?>
-        </li>
-    </ul>
+
+    <h2>List hotel yang ada di {{ $data->cari }}</h2>
+    <?php foreach ($hotel as $hotels) : ?>
+        <div class="col-6">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <?= $hotels["name"]; ?>
+                    <a href="/detail_hotel/<?= $hotels["destinationId"]; ?>" class="badge badge-info">Detail</a>
+                </li>
+            </ul>
+        </div>
+    <?php endforeach; ?>
+
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 
